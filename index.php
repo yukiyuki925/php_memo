@@ -11,7 +11,7 @@ endif;
 // URLパラメーターのpageから値を取得し、$pageに格納
 $page = filter_input(INPUT_GET,'page',FILTER_SANITIZE_NUMBER_INT);
 
-// $pageに値が入っていなかったら、page=1を表示
+// $pageに値が入っていなかったら、もしくは不正な値の場合、page=1を表示
 $page = ($page ? : 1);
 
 // ５つのデータをページ変遷によって表示
@@ -21,7 +21,7 @@ $start = ($page - 1) * 5;
 $stmt->bind_param('i',$start);
 
 // 処理を実行
-$stmt->execute();
+$result = $stmt->execute();
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +38,10 @@ $stmt->execute();
 
   <!-- input.htmlに移動するリンク -->
   <p>→<a href="input.html">新しいメモ</a></p>
+  <!-- $resultが正しいか判定 -->
+  <?php if(!$result): ?>
+  <p>表示するメモはありません</p>
+  <?php endif ?>
 
   <!-- 抽出した値から、何を使用するか提示 -->
   <?php $stmt->bind_result($id, $memo, $created); ?>
@@ -55,6 +59,10 @@ $stmt->execute();
   </div>
   <hr>
   <?php endwhile ?>
+  <p>
+    <a href="?page=<?php echo $page - 1; ?>"><?php echo $page - 1 ?>ページ目へ</a> |
+    <a href="?page=<?php echo $page + 1; ?>"><?php echo $page + 1 ?>ページ目へ</a>
+  </p>
 </body>
 
 </html>
