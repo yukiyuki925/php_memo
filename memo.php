@@ -41,8 +41,16 @@
   ?>
 
   <!-- 選択した値を表示 -->
-  <div><?php echo htmlspecialchars($memo); ?></div>
-  <small><?php echo htmlspecialchars($created); ?></small>
+  <div>
+    <pre><?php echo htmlspecialchars($memo); ?></pre>
+  </div>
+  <small>
+    <pre><?php echo htmlspecialchars($created); ?></pre>
+  </small>
+
+  <p><a href="update.php?id=<?php echo $id; ?>">編集する</a> |
+    <a href="/php_memo/?page=1">一覧へ</a>
+  </p>
 </body>
 
 </html>

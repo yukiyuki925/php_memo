@@ -26,10 +26,14 @@ if (!$result){
 <body>
   <!-- update_do.phpに接続 -->
   <form action="update_do.php" method="post">
+    <!-- webは値を次のページまでしか保持できないので、クッキーやセッションで値を保持する必要がある -->
+    <!-- user操作に関わらず値を渡す inputで値を保持-->
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
+
     <!-- name属性にmemoを指定 -->
-    <textarea name="memo" id="" cols="50" rows="10"
+    <textarea name="memo" cols="50" rows="10"
       placeholder="メモの入力してください"><?php echo htmlspecialchars($memo); ?></textarea><br />
-    <button type="submit">編集する</button>
+    <button type=" submit">編集する</button>
   </form>
 </body>
 
