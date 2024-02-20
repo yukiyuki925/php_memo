@@ -1,6 +1,6 @@
 <?php
+require('dbconnect.php');
 $memo = filter_input(INPUT_POST,'memo',FILTER_SANITIZE_SPECIAL_CHARS);
-$db = new mysqli('localhost:3306','root','root','mydb');
 $stmt = $db->prepare('insert into memos(memo) values(?)');
 if (!$stmt):
   die($db->error);
@@ -10,6 +10,7 @@ $ret = $stmt->execute();
 
 if ($ret):
   echo "登録されました";
+  echo '<br>→ <a href="index.php">トップへ戻る</a>';
 else:
   echo $db->error;
 endif;
