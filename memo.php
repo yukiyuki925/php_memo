@@ -48,7 +48,9 @@
     <pre><?php echo htmlspecialchars($created); ?></pre>
   </small>
 
-  <p><a href="update.php?id=<?php echo $id; ?>">編集する</a> |
+  <p>
+    <a href="update.php?id=<?php echo $id; ?>">編集する</a> |
+    <a href="delete.php?id=<?php echo $id; ?>">削除する</a> |
     <a href="/php_memo/?page=1">一覧へ</a>
   </p>
 </body>
